@@ -199,6 +199,15 @@ namespace CubePdf.Ghostscript
         }
 
         /* ----------------------------------------------------------------- */
+        /// Orientation
+        /* ----------------------------------------------------------------- */
+        public int Orientation
+        {
+            get { return _orientation; }
+            set { _orientation = value; }
+        }
+
+        /* ----------------------------------------------------------------- */
         /// PageRotation
         /* ----------------------------------------------------------------- */
         public bool PageRotation
@@ -399,7 +408,7 @@ namespace CubePdf.Ghostscript
                 args.Add("-dFirstPage=" + this._first.ToString());
                 if (this._first < this._last) args.Add("-dLastPage=" + this._last.ToString());
             }
-            if (this._rotate) args.Add("-dAutoRotatePages=/PageByPage");
+            if (this._rotate) args.Add(string.Format("-dAutoRotatePages={0}", _rotate ? "/PageByPage" : "/None"));
 
             // Add default options
             foreach (string elem in defaults_) args.Add(elem);
@@ -430,6 +439,11 @@ namespace CubePdf.Ghostscript
             else
             {
                 args.Add(String.Format("-sOutputFile={0}", dest));
+                if (_orientation >= 0 && Orientation <= 3)
+                {
+                    args.Add(String.Format("-c <</Orientation {0}>>", _orientation));
+                    args.Add("-f");
+                }
                 foreach (var src in sources) args.Add(src);
             }
 
@@ -542,6 +556,7 @@ namespace CubePdf.Ghostscript
         private Papers _paper = Papers.Unknown;
         private int _first = 1;
         private int _last = 1;
+        private int _orientation = -1;
         private bool _rotate = true;
         private string _dest = "";
         private List<string> _includes = new List<string>();

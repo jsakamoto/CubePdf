@@ -91,6 +91,30 @@ namespace CubePdf {
 
         /* ----------------------------------------------------------------- */
         ///
+        /// Orientation
+        /// 
+        /// <summary>
+        /// 用紙（ページ）の向きを表す列挙型です。
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// それぞれの値は以下を表します。
+        /// 
+        /// Portrait   : 縦向き
+        /// Seascape   : 横向き・逆さ
+        /// UpsideDown : 縦向き・逆さ
+        /// Landscape  : 横向き
+        /// None       : 指定しない
+        /// </remarks>
+        ///
+        /* ----------------------------------------------------------------- */
+        public enum Orientations : int
+        {
+            Portrait, Seascape, UpsideDown, Landscape, None,
+        }
+
+        /* ----------------------------------------------------------------- */
+        ///
         /// Resolutions
         ///
         /// <summary>

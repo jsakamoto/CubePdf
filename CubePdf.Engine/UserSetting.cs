@@ -511,6 +511,28 @@ namespace CubePdf
 
         /* ----------------------------------------------------------------- */
         ///
+        /// Orientation
+        /// 
+        /// <summary>
+        /// 用紙（ページ）の向きを取得、または設定します。
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// 設定可能な値は以下の通りです：
+        /// Portrait, Seascape, UpsideDown, Landscape, None
+        /// これらの値は、例えば、CubePdf.Parameter.Orientation.Portlait
+        /// のように設定します。
+        /// </remarks>
+        ///
+        /* ----------------------------------------------------------------- */
+        public Parameter.Orientations Orientation
+        {
+            get { return _orientation; }
+            set { _orientation = value; }
+        }
+
+        /* ----------------------------------------------------------------- */
+        ///
         /// ExistedFile
         ///
         /// <summary>
@@ -1407,6 +1429,7 @@ namespace CubePdf
         private Parameter.PdfVersions _pdfver = Parameter.PdfVersions.Ver1_7;
         private Parameter.Resolutions _resolution = Parameter.Resolutions.Resolution300;
         private Parameter.ExistedFiles _exist = Parameter.ExistedFiles.Overwrite;
+        private Parameter.Orientations _orientation = Parameter.Orientations.None;
         private Parameter.PostProcesses _postproc = Parameter.PostProcesses.Open;
         private Parameter.DownSamplings _downsampling = Parameter.DownSamplings.None;
         private Parameter.ImageFilters _filter = Parameter.ImageFilters.FlateEncode;

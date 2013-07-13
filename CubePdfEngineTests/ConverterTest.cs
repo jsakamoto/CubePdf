@@ -209,6 +209,35 @@ namespace CubePdf
 
         /* ----------------------------------------------------------------- */
         ///
+        /// TestOrientation
+        /// 
+        ///
+        ///
+        /* ----------------------------------------------------------------- */
+        [Test]
+        public void TestOrientation()
+        {
+            var setting = new UserSetting(false);
+            Assert.IsTrue(setting.Load(), "Load from registry");
+
+            setting.PostProcess = Parameter.PostProcesses.None;
+
+            var type = Parameter.FileTypes.PDF;
+            //foreach (Parameter.FileTypes type in Enum.GetValues(typeof(Parameter.FileTypes)))
+            foreach (Parameter.Orientations orientation in Enum.GetValues(typeof(Parameter.Orientations)))
+            {
+                setting.FileType = type;
+                setting.Orientation = orientation;
+                setting.PageRotation = false;
+                ExecConvert(setting, string.Format("-{0}-disable-rotation", orientation.ToString()));
+
+                setting.PageRotation = true;
+                ExecConvert(setting, string.Format("-{0}-enable-rotation", orientation.ToString()));
+            }
+        }
+
+        /* ----------------------------------------------------------------- */
+        ///
         /// TestResolution
         ///
         /// <summary>

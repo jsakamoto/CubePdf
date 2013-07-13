@@ -114,6 +114,7 @@ namespace CubePdf {
             try {
                 gs.AddInclude(setting.LibPath + @"\lib");
                 gs.PageRotation = setting.PageRotation;
+                gs.Orientation = (int)setting.Orientation;
                 gs.Resolution = Parameter.ResolutionValue(setting.Resolution);
 
                 this.ConfigImageOperations(setting, gs);
