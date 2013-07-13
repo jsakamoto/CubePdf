@@ -314,7 +314,6 @@ namespace CubePdf.Ghostscript
                     gsapi_delete_instance(instance);
                 }
             }
-
             return status;
         }
 
@@ -408,7 +407,7 @@ namespace CubePdf.Ghostscript
                 args.Add("-dFirstPage=" + this._first.ToString());
                 if (this._first < this._last) args.Add("-dLastPage=" + this._last.ToString());
             }
-            if (this._rotate) args.Add(string.Format("-dAutoRotatePages={0}", _rotate ? "/PageByPage" : "/None"));
+            args.Add(string.Format("-dAutoRotatePages={0}", _rotate ? "/PageByPage" : "/None"));
 
             // Add default options
             foreach (string elem in defaults_) args.Add(elem);
@@ -441,7 +440,7 @@ namespace CubePdf.Ghostscript
                 args.Add(String.Format("-sOutputFile={0}", dest));
                 if (_orientation >= 0 && Orientation <= 3)
                 {
-                    args.Add(String.Format("-c <</Orientation {0}>>", _orientation));
+                    args.Add(String.Format("-c \"<</Orientation {0}>> setpagedevice\"", _orientation));
                     args.Add("-f");
                 }
                 foreach (var src in sources) args.Add(src);

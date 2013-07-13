@@ -876,7 +876,7 @@ namespace CubePdf
                 using (var root = Registry.CurrentUser.OpenSubKey(_RegRoot + '\\' + _RegVersion, false))
                 {
                     var document = new CubePdf.Settings.Document();
-                    document.Read(root);
+                    //document.Read(root);
                     Load(document);
                 }
 
